@@ -29,6 +29,17 @@ function parsePuzzleInputToCommands(content: string) {
     });
 }
 
+function calculatePosition(commands: Array<{ command: string, distance: number }>) {
+  return commands.reduce((acc, currentValue) => {
+    switch(currentValue.command) {
+      case 'up': acc.depth -= currentValue.distance; return acc;
+      case 'down': acc.depth += currentValue.distance; return acc;
+      case 'forward': acc.distance += currentValue.distance; ; return acc;
+      default: console.log('🤷‍♀️'); return acc;
+    }
+  }, { distance: 0, depth: 0});
+}
+
 function calculatePositionPartTwo(commands: Array<{ command: string, distance: number }>) {
   return commands.reduce((acc, currentValue) => {
     switch(currentValue.command) {
@@ -41,17 +52,6 @@ function calculatePositionPartTwo(commands: Array<{ command: string, distance: n
       default: console.log('🤷‍♀️'); return acc;
     }
   }, { aim: 0, distance: 0, depth: 0});
-}
-
-function calculatePosition(commands: Array<{ command: string, distance: number }>) {
-  return commands.reduce((acc, currentValue) => {
-    switch(currentValue.command) {
-      case 'up': acc.depth -= currentValue.distance; return acc;
-      case 'down': acc.depth += currentValue.distance; return acc;
-      case 'forward': acc.distance += currentValue.distance; ; return acc;
-      default: console.log('🤷‍♀️'); return acc;
-    }
-  }, { distance: 0, depth: 0});
 }
 
 function poorMansUnitTest() {
@@ -83,5 +83,5 @@ forward 2`;
     console.error('incorrect parsing/logic applied, depth should be 60, distance should be 15 but got', output);
     return process.exit(1);
   }
-  console.log('✅ unit test passed');
+  console.log('✅ unit test part two passed');
 }

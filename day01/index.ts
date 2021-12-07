@@ -22,10 +22,7 @@ function parseReadingsFromFile(file: string): Promise<Array<number>> {
 function countIncreases(sonarDepthReadings: Array<number>): number {
   return sonarDepthReadings.reduce(
     (accumulator, currentReading) => {
-      if (
-        accumulator.previousReading &&
-        currentReading > accumulator.previousReading
-      ) {
+      if (accumulator.previousReading && currentReading > accumulator.previousReading) {
         accumulator.increases++;
       }
 
